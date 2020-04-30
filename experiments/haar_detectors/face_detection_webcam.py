@@ -2,6 +2,8 @@
 Based on:
 https://docs.opencv.org/3.4.2/d7/d8b/tutorial_py_face_detection.html
 Example of Haar-cascade Detection in OpenCV
+
+Connect to the webcam and bounding your face and eyes.
 '''
 
 import numpy as np
