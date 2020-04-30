@@ -1,0 +1,9 @@
+@media (min-width: $max-width) {
+    .content {
+        .content-inner {
+            .content__title_padding-top {
+                padding-top: 100px !important;
+            }
+        }
+    }
+}

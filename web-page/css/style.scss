@@ -1,0 +1,30 @@
+@import '../source/null-style';
+@import '../source/vars';
+@import '../source/media-style';
+
+html {
+    font-size: 16px;
+}
+
+.content {
+    min-width: 320px;
+    max-width: 1366px;
+    min-height: 100vh;
+    background-color: #eee;
+    margin: 0 auto;
+
+    .content-inner {
+        width: 100%;
+
+        // заголовок сайта
+        .content__title {
+            display: block;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .content__title_padding-top {
+            padding-top: calc(50px + 50*(100vw - 320px)/(1366 - 320));
+        }
+    }
+}
