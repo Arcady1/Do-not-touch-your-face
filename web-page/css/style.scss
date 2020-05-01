@@ -30,8 +30,10 @@ html {
 
         // web-cam
         .content__video {
-            height: 500px;
             display: block;
+            width: 100%;
+            max-width: 700px;
+            height: auto;
             outline: 1px solid #000;
         }
 
