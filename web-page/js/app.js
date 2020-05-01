@@ -1,0 +1,1 @@
+!function(){var e=document.getElementById("video");navigator.getMedia=navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia||navigator.msGetUserMedia,navigator.mediaDevices.getUserMedia({video:!0,audio:!1}).then(a=>{e.srcObject=a,e.play()})}();
