@@ -1,24 +1,15 @@
-function add() {
-    var a, b;
+// web-cam code
+(function () {
+    var video = document.getElementById('video');
 
-    a = document.getElementById('dig1').value;
-    a = parceInt(a);
+    navigator.getMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
 
-    b = document.getElementById('dig2').value;
-    b = parceInt(b);
-    // resAdd = parseInt(resAdd);
-
-    console.log(a + b);
-}
-
-// function sub() {
-//     var a, b;
-
-//     a = document.getElementById('dig1').value;
-//     a = parceInt(a);
-
-//     b = document.getElementById('dig2').value;
-//     b = parceInt(b);
-
-//     console.log(a - b);
-// }
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+        });
+})();
