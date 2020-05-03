@@ -1,15 +1,17 @@
 // подключение к узлу canvas и получение его контекста для работы
-let canvas = document.getElementById('canvas');
+let canvas, video, ctx;
+
+canvas = document.getElementById('canvas');
+video = document.getElementById('video');
 
 if (canvas.getContext('2d')) {
-  let ctx = canvas.getContext('2d');
+  ctx = canvas.getContext('2d');
+  videolink();
 } else
   alert('You browser does not support canvas.getContext("2d")');
 
 // web-cam code
-(function () {
-  let video = document.getElementById('video');
-
+function videolink() {
   navigator.getMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
@@ -22,13 +24,13 @@ if (canvas.getContext('2d')) {
     .then(stream => {
       video.srcObject = stream;
       video.play();
+      setInterval(function () {
+        Photo();
+      }, 60);
     });
-})();
-
-setInterval(function () {
-  Photo();
-}, 3000)
+}
 
 function Photo() {
   console.log('inFunction');
+  ctx.drawImage(video, -110, -50);
 }

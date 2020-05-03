@@ -1,5 +1,6 @@
 @import '../source/null-style';
 @import '../source/vars';
+@import '../source/templates';
 @import '../source/media-style';
 
 html {
@@ -9,9 +10,11 @@ html {
 .content {
     min-width: 320px;
     max-width: $max-width;
-    min-height: 1500px;
+    height: 100vh;
     background-color: #eee;
     margin: 0 auto;
+
+    font-family: "Georgia", sans-serif;
 
     .content-inner {
         width: 100%;
@@ -35,13 +38,14 @@ html {
             margin-top: 50px;
 
             // web-cam
-            .video-canv {
-                display: block;
-                width: 100%;
-                max-width: $max-width / 2.3;
-                min-width: 500px;
-                height: auto;
-                outline: 1px solid #000;
+            .video_set {
+                @extend %video-canv-set;
+            }
+
+            .canv_set {
+                // @extend %video-canv-set;
+                // width: 500px;
+                // height: 300px;
             }
         }
     }
