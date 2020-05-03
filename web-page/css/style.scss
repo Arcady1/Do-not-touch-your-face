@@ -41,6 +41,14 @@ html {
             .video_set {
                 @extend %video-canv-set;
             }
+
+            // canvas
+            .canvas_set {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                max-height: 250px;
+            }
         }
     }
 }

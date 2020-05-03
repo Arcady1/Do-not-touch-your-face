@@ -1,11 +1,12 @@
 // подключение к узлу canvas и получение его контекста для работы
-let canvas, video, ctx;
+let canvas, video, ctx, imgToServer, imgData;
 
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
 
 if (canvas.getContext('2d')) {
   ctx = canvas.getContext('2d');
+  ctx.scale(0.3, 0.3);
   videolink();
 } else
   alert('You browser does not support canvas.getContext("2d")');
@@ -26,11 +27,14 @@ function videolink() {
       video.play();
       setInterval(function () {
         Photo();
-      }, 60);
+      }, 2000);
     });
 }
 
 function Photo() {
-  console.log('inFunction');
-  ctx.drawImage(video, -110, -50);
+  ctx.drawImage(video, 180, 0);
+
+  // РАСКОММЕНТИРОВАТЬ! imgData получает URL скриншотов
+  // imgData = canvas.toDataURL('image/jpeg', 0.5);
+  // console.log(imgData);
 }
