@@ -1,2 +1,2 @@
 # Open this web-page:
-https://rawcdn.githack.com/Gooogr/Do-not-touch-your-face/9aa7b7fff193463ee64a8172cf67855d81eb7504/web-page/index.html
+https://rawcdn.githack.com/Gooogr/Do-not-touch-your-face/13fe18966bd24dc4427b218e55691a8d6b207a3a/web-page/index.html
