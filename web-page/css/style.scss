@@ -1,5 +1,6 @@
 @import '../source/null-style';
 @import '../source/vars';
+@import '../source/templates';
 @import '../source/media-style';
 
 html {
@@ -8,14 +9,15 @@ html {
 
 .content {
     min-width: 320px;
-    max-width: 1366px;
-    min-height: 100vh;
+    max-width: $max-width;
+    height: 100vh;
     background-color: #eee;
     margin: 0 auto;
 
+    font-family: "Georgia", sans-serif;
+
     .content-inner {
         width: 100%;
-        padding: 0 10px 0;
 
         // заголовок сайта
         .content__title {
@@ -28,17 +30,23 @@ html {
             padding-top: calc(50px + 50*(100vw - 320px)/(1366 - 320));
         }
 
-        // web-cam
         .content__video {
-            display: block;
             width: 100%;
-            max-width: 700px;
-            height: auto;
-            outline: 1px solid #000;
-        }
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
 
-        .content__video_margin {
-            margin: 20px auto 0;
+            // web-cam
+            .video_set {
+                @extend %video-canv-set;
+            }
+
+            .canv_set {
+                // @extend %video-canv-set;
+                // width: 500px;
+                // height: 300px;
+            }
         }
     }
 }
