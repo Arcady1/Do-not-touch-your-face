@@ -41,12 +41,6 @@ html {
             .video_set {
                 @extend %video-canv-set;
             }
-
-            .canv_set {
-                // @extend %video-canv-set;
-                // width: 500px;
-                // height: 300px;
-            }
         }
     }
 }
