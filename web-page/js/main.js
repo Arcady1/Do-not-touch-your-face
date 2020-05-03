@@ -25,9 +25,14 @@ function videolink() {
     .then(stream => {
       video.srcObject = stream;
       video.play();
+      canvas.style.display = 'block';
       setInterval(function () {
         Photo();
       }, 2000);
+    })
+
+    .catch(() => {
+      console.log("No camera access!");
     });
 }
 
