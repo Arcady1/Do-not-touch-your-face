@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don't touch your face</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" defer></script>
 </head>
 
 <body>
@@ -14,7 +13,7 @@
         <div class="content-inner">
             <h1 class="content__title content__title_padding-top">Don't touch your face!</h1>
             <div class="content__video">
-                <video id="video" autoplay="true" class="video_set">
+                <video id="video" autoplay="true" class="video_set" style="width: 640px; height: 480px;">
                     No video support in your browser... Use Google Chrome
                 </video>
                 <canvas id="canvas" class="canvas_set">
@@ -23,6 +22,12 @@
             </div>
         </div>
     </div>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- Load BodyPix -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+    <!-- Load mainScript -->
+    <script src="js/app.js"></script>
 </body>
 
 </html>

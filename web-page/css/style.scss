@@ -10,7 +10,7 @@ html {
 .content {
     min-width: 320px;
     max-width: $max-width;
-    height: 100vh;
+    min-height: 1000px;
     background-color: #eee;
     margin: 0 auto;
 
@@ -31,7 +31,7 @@ html {
         }
 
         .content__video {
-            width: 100%;
+            // width: 100%;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -39,7 +39,7 @@ html {
 
             // web-cam
             .video_set {
-                @extend %video-canv-set;
+                // @extend %video-canv-set;
             }
 
             // canvas
