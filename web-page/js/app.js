@@ -42,4 +42,22 @@ function Photo() {
   // РАСКОММЕНТИРОВАТЬ! imgData получает URL скриншотов
   // imgData = canvas.toDataURL('image/jpeg', 0.5);
   // console.log(imgData);
+
+  async function loadAndPredict() {
+    const net = await bodyPix.load({
+      architecture: 'MobileNetV1',
+      outputStride: 16,
+      multiplier: 0.75,
+      quantBytes: 2
+    });
+
+    const segmentation = await net.segmentPerson(canvas, {
+      flipHorizontal: false,
+      internalResolution: 'medium',
+      segmentationThreshold: 0.7
+    });
+
+    console.log(segmentation);
+  }
+  loadAndPredict();
 }
