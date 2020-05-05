@@ -7,7 +7,6 @@ image = document.getElementById('image');
 
 if (canvas.getContext('2d')) {
   ctx = canvas.getContext('2d');
-  // ctx.scale(0.3, 0.3);
   videolink();
 } else
   alert('You browser does not support canvas.getContext("2d")');
@@ -29,7 +28,7 @@ function videolink() {
       canvas.style.display = 'block';
       setInterval(function () {
         Photo();
-      }, 2000);
+      }, 1000);
     })
 
     .catch(() => {
@@ -40,7 +39,7 @@ function videolink() {
 function Photo() {
   // ctx.drawImage(video, 180, 0);
 
-  // РАСКОММЕНТИРОВАТЬ! imgData получает URL скриншотов
+  // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
   // imgData = canvas.toDataURL('image/jpeg', 0.5);
   // console.log(imgData);
 
@@ -52,30 +51,27 @@ function Photo() {
       quantBytes: 2
     });
 
-    console.log('Yes1');
-
-    const segmentation = await net.segmentPersonParts(image, {
+    const segmentation = await net.segmentPersonParts(video, {
       flipHorizontal: true,
       internalResolution: 'medium',
       segmentationThreshold: 0.7
     });
 
-    console.log('Yes2');
-
+    // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
     const opacity = 0.7;
     const flipHorizontal = true;
     const maskBlurAmount = 0;
 
+    // наложение маски на ведопоток и отбражение на холсте
     bodyPix.drawMask(
-      canvas, image, coloredPartImage, opacity, maskBlurAmount,
+      canvas, video, coloredPartImage, opacity, maskBlurAmount,
       flipHorizontal);
 
     console.log(segmentation);
   }
+
   loadAndPredict();
-
-
 }
 
 // function f1() {

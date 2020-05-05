@@ -1,6 +1,4 @@
 @import '../source/null-style';
-@import '../source/vars';
-@import '../source/templates';
 @import '../source/media-style';
 
 html {
@@ -9,7 +7,7 @@ html {
 
 .content {
     min-width: 320px;
-    max-width: $max-width;
+    max-width: 1366px;
     min-height: 1000px;
     background-color: #eee;
     margin: 0 auto;
@@ -31,7 +29,6 @@ html {
         }
 
         .content__video {
-            // width: 100%;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -39,13 +36,11 @@ html {
 
             // web-cam
             .video_set {
-                // @extend %video-canv-set;
+                outline: 1px solid #000;
             }
 
             // canvas
             .canvas_set {
-                // width: 500px;
-                // height: 250px;
                 display: block;
                 outline: 1px solid #000;
             }
