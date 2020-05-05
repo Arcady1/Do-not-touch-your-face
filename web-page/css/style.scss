@@ -44,11 +44,10 @@ html {
 
             // canvas
             .canvas_set {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                max-height: 250px;
-                display: none;
+                // width: 500px;
+                // height: 250px;
+                display: block;
+                outline: 1px solid #000;
             }
         }
     }
