@@ -56,6 +56,7 @@ function Photo() {
     });
     console.log("Successfully loaded!");
 
+    // Segmentation settings
     const segmentationConfig = {
       flipHorizontal: true,
       internalResolution: 'medium',
@@ -70,29 +71,26 @@ function Photo() {
 
       if (((pix > 1) & (pix < 10)) | (pix > 11))
         segmentation.data[x] = -1;
-
-      // объекты, в которых хранятся позиции рук и головы
-      else {
-        if (pix == 0) {
-          // console.log(segmentation.a)
-        };
-        // let headLocation = {
-        //   posX: 0,
-        //   posY: 0,
-        //   center: 0
-        // }
-        // let leftHandLocation = {
-        //   posX: 0,
-        //   posY: 0,
-        //   center: 0
-        // }
-        // let rightHandLocation = {
-        //   posX: 0,
-        //   posY: 0,
-        //   center: 0
-        // }
-      }
     };
+
+    // объект; содержит центральную позицию по X и Y
+    // объекты, в которых хранятся позиции рук и головы
+    // let headLocation = {
+    //   posX: 0,
+    //   posY: 0,
+    //   center: 0
+    // }
+    // let leftHandLocation = {
+    //   posX: 0,
+    //   posY: 0,
+    //   center: 0
+    // }
+    // let rightHandLocation = {
+    //   posX: 0,
+    //   posY: 0,
+    //   center: 0
+    // }
+    // }
 
     // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
