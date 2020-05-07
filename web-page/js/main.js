@@ -3,6 +3,7 @@ let canvas, video, ctx, imgData;
 
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
+audio = document.getElementById('audio');
 // image = document.getElementById('image');
 
 // проверка на поддержку браузером canvas.getContext("2d")
@@ -37,11 +38,9 @@ function videolink() {
     });
 }
 
-setInterval(Photo(), 2000);
+setInterval(Photo(), 60);
 
 function Photo() {
-  // ctx.drawImage(video, 0, 0);
-
   // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
   // imgData = canvas.toDataURL('image/jpeg', 0.5);
   // console.log(imgData);
@@ -94,9 +93,17 @@ function Photo() {
     if (arr_palms.length < arr_face.length) {
       const something = await searching(arr_face, arr_palms);
       console.log(something);
-    } else {
+
+      if (something == 'found!')
+        audio.play();
+    }
+    // 
+    else {
       const something = await searching(arr_palms, arr_face);
       console.log(something);
+
+      if (something == 'found!')
+        audio.play();
     };
 
     // поиск пересечения элементотв массивов
