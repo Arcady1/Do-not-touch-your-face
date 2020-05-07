@@ -102,24 +102,28 @@ function Photo() {
     // поиск пересечения элементотв массивов
     function searching(arr_1, arr_2) {
       console.log("Began...");
-      let num, pos, length;
+      let num, pos, length, min_dist;
 
+      min_dist = 10;
       length = arr_1.length;
 
       for (let digit = 0; digit < arr_2.length; digit++) {
         num = arr_2[digit];
         pos = parseInt(length / 2);
 
-        if (num == arr_1[0])
+        if (Math.abs(num - arr_1[0]) < min_dist)
           return ('found!');
 
-        else if (num == arr_1[length - 1])
+        else if (Math.abs(num - arr_1[length - 1]) < min_dist)
           return ('found!');
 
         else {
           while (pos != 0) {
             if (pos == (length - 1))
               break;
+            // 
+            else if (Math.abs(num - arr_1[pos]) < min_dist)
+              return ('found!');
             // 
             else if (num < arr_1[pos])
               pos = parseInt(pos / 2);
@@ -129,9 +133,6 @@ function Photo() {
               if (arr_1[pos] > num)
                 break;
             }
-            //  
-            else
-              return ('found!');
           }
         }
       }
