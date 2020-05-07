@@ -54,48 +54,47 @@ function Photo() {
       multiplier: 0.75,
       quantBytes: 2
     });
-    console.log("Successfully loaded!");
 
     // Segmentation settings
     const segmentationConfig = {
-      flipHorizontal: true,
+      flipHorizontal: false,
       internalResolution: 'medium',
       segmentationThreshold: 0.7
     };
 
     const segmentation = await net.segmentPersonParts(image, segmentationConfig);
 
-    // идентифицируем только лицо и ладони
+    let arr_face = [];
+    let arr_palms = [];
+    // идентифицируем только лицо (0) и ладони (10)
     for (let x = 0; x < 307200; x++) {
       pix = segmentation.data[x];
 
       if (((pix > 1) & (pix < 10)) | (pix > 11))
         segmentation.data[x] = -1;
+      // массив, хранящий координаты лица
+      else if ((pix == 0) | (pix == 1)) {
+        segmentation.data[x] = 0;
+        arr_face.push(x);
+      }
+      // массив, хранящий координаты лица
+      else if ((pix == 10) | (pix == 11)) {
+        segmentation.data[x] = 10;
+        arr_palms.push(x);
+      }
     };
 
-    // объект; содержит центральную позицию по X и Y
-    // объекты, в которых хранятся позиции рук и головы
-    // let headLocation = {
-    //   posX: 0,
-    //   posY: 0,
-    //   center: 0
-    // }
-    // let leftHandLocation = {
-    //   posX: 0,
-    //   posY: 0,
-    //   center: 0
-    // }
-    // let rightHandLocation = {
-    //   posX: 0,
-    //   posY: 0,
-    //   center: 0
-    // }
-    // }
+    // проверка, есть ли пересечение массивов
+    // code
+
+    // for (let y = 0; y < arr_palms.length; y++) {
+    //   segmentation.data[arr_palms[y]] = 5;
+    // };
 
     // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
     const opacity = 0.7;
-    const flipHorizontal = true;
+    const flipHorizontal = false;
     const maskBlurAmount = 0;
 
     // наложение маски на ведопоток и отбражение на холсте
@@ -104,6 +103,8 @@ function Photo() {
       flipHorizontal);
 
     console.log(segmentation);
+    // console.log(arr_palms);
+
   }
 
   loadAndPredict();
