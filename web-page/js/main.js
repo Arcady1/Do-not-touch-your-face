@@ -1,10 +1,12 @@
 // подключение к узлу canvas и получение его контекста для работы
-let canvas, video, ctx, imgToServer, imgData;
+let canvas, video, ctx, imgData;
 
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
-image = document.getElementById('image');
+audio = document.getElementById('audio');
+// image = document.getElementById('image');
 
+// проверка на поддержку браузером canvas.getContext("2d")
 if (canvas.getContext('2d')) {
   ctx = canvas.getContext('2d');
   videolink();
@@ -36,14 +38,15 @@ function videolink() {
     });
 }
 
-function Photo() {
-  // ctx.drawImage(video, 180, 0);
+setInterval(Photo(), 60);
 
+function Photo() {
   // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
   // imgData = canvas.toDataURL('image/jpeg', 0.5);
   // console.log(imgData);
 
   async function loadAndPredict() {
+    // Loading the model
     const net = await bodyPix.load({
       architecture: 'MobileNetV1',
       outputStride: 16,
@@ -51,16 +54,103 @@ function Photo() {
       quantBytes: 2
     });
 
-    const segmentation = await net.segmentPersonParts(video, {
-      flipHorizontal: true,
+    // Segmentation settings
+    const segmentationConfig = {
+      flipHorizontal: false,
       internalResolution: 'medium',
       segmentationThreshold: 0.7
-    });
+    };
+
+    const segmentation = await net.segmentPersonParts(video, segmentationConfig);
+
+    let arr_face = [];
+    let arr_palms = [];
+    // идентифицируем только лицо (0) и ладони (10)
+    for (let x = 0; x < (canvas.width * canvas.height); x++) {
+      pix = segmentation.data[x];
+
+      if (((pix > 1) & (pix < 10)) | (pix > 11))
+        segmentation.data[x] = -1;
+      // массив, хранящий координаты лица
+      else if ((pix == 0) | (pix == 1)) {
+        segmentation.data[x] = 0;
+        arr_face.push(x);
+      }
+      // массив, хранящий координаты лица
+      else if ((pix == 10) | (pix == 11)) {
+        segmentation.data[x] = 10;
+        arr_palms.push(x);
+      }
+    };
+
+    // координаты лица
+    console.log("face:");
+    console.log(arr_face);
+    // координаты кистей
+    console.log("palms:");
+    console.log(arr_palms);
+
+    if (arr_palms.length < arr_face.length) {
+      const something = await searching(arr_face, arr_palms);
+      console.log(something);
+
+      if (something == 'found!')
+        audio.play();
+    }
+    // 
+    else {
+      const something = await searching(arr_palms, arr_face);
+      console.log(something);
+
+      if (something == 'found!')
+        audio.play();
+    };
+
+    // поиск пересечения элементотв массивов
+    function searching(arr_1, arr_2) {
+      console.log("Began...");
+      let num, pos, length, min_dist;
+
+      min_dist = 10;
+      length = arr_1.length;
+
+      for (let digit = 0; digit < arr_2.length; digit++) {
+        num = arr_2[digit];
+        pos = parseInt(length / 2);
+
+        if (Math.abs(num - arr_1[0]) < min_dist)
+          return ('found!');
+
+        else if (Math.abs(num - arr_1[length - 1]) < min_dist)
+          return ('found!');
+
+        else {
+          while (pos != 0) {
+            if (pos == (length - 1))
+              break;
+            // 
+            else if (Math.abs(num - arr_1[pos]) < min_dist)
+              return ('found!');
+            // 
+            else if (num < arr_1[pos])
+              pos = parseInt(pos / 2);
+            // 
+            else if (num > arr_1[pos]) {
+              pos += (parseInt((length - pos) / 2));
+              if (arr_1[pos] > num)
+                break;
+            }
+          }
+        }
+      }
+
+      return ('NOTfound!');
+    };
 
     // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
     const opacity = 0.7;
-    const flipHorizontal = true;
+    const flipHorizontal = false;
     const maskBlurAmount = 0;
 
     // наложение маски на ведопоток и отбражение на холсте
@@ -69,12 +159,8 @@ function Photo() {
       flipHorizontal);
 
     console.log(segmentation);
+    // console.log(arr_palms);
   }
 
   loadAndPredict();
 }
-
-// function f1() {
-//   let audio = document.getElementById('sound');
-//   audio.play();
-// }
