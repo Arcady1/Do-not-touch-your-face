@@ -1,46 +1,46 @@
 // подключение к узлу canvas и получение его контекста для работы
-let canvas, video, ctx, imgToServer, imgData;
+let canvas, video, ctx, imgData;
 
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
-image = document.getElementById('image');
+// image = document.getElementById('image');
 
 // проверка на поддержку браузером canvas.getContext("2d")
 if (canvas.getContext('2d')) {
   ctx = canvas.getContext('2d');
-  // videolink();
+  videolink();
 } else
   alert('You browser does not support canvas.getContext("2d")');
 
 // web-cam code
-// function videolink() {
-//   navigator.getMedia = navigator.getUserMedia ||
-//     navigator.webkitGetUserMedia ||
-//     navigator.mozGetUserMedia ||
-//     navigator.msGetUserMedia;
+function videolink() {
+  navigator.getMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
 
-//   navigator.mediaDevices.getUserMedia({
-//       video: true,
-//       audio: false
-//     })
-//     .then(stream => {
-//       video.srcObject = stream;
-//       video.play();
-//       canvas.style.display = 'block';
-//       setInterval(function () {
-//         Photo();
-//       }, 1000);
-//     })
+  navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    })
+    .then(stream => {
+      video.srcObject = stream;
+      video.play();
+      canvas.style.display = 'block';
+      setInterval(function () {
+        Photo();
+      }, 1000);
+    })
 
-//     .catch(() => {
-//       console.log("No camera access!");
-//     });
-// }
+    .catch(() => {
+      console.log("No camera access!");
+    });
+}
 
-setInterval(Photo(), 60);
+setInterval(Photo(), 2000);
 
 function Photo() {
-  // ctx.drawImage(video, 180, 0);
+  // ctx.drawImage(video, 0, 0);
 
   // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
   // imgData = canvas.toDataURL('image/jpeg', 0.5);
@@ -62,12 +62,12 @@ function Photo() {
       segmentationThreshold: 0.7
     };
 
-    const segmentation = await net.segmentPersonParts(image, segmentationConfig);
+    const segmentation = await net.segmentPersonParts(video, segmentationConfig);
 
     let arr_face = [];
     let arr_palms = [];
     // идентифицируем только лицо (0) и ладони (10)
-    for (let x = 0; x < 307200; x++) {
+    for (let x = 0; x < (canvas.width * canvas.height); x++) {
       pix = segmentation.data[x];
 
       if (((pix > 1) & (pix < 10)) | (pix > 11))
@@ -85,8 +85,10 @@ function Photo() {
     };
 
     // координаты лица
+    console.log("face:");
     console.log(arr_face);
     // координаты кистей
+    console.log("palms:");
     console.log(arr_palms);
 
     if (arr_palms.length < arr_face.length) {
@@ -95,7 +97,7 @@ function Photo() {
     } else {
       const something = await searching(arr_palms, arr_face);
       console.log(something);
-    }
+    };
 
     // поиск пересечения элементотв массивов
     function searching(arr_1, arr_2) {
@@ -135,7 +137,7 @@ function Photo() {
       }
 
       return ('NOTfound!');
-    }
+    };
 
     // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
@@ -145,7 +147,7 @@ function Photo() {
 
     // наложение маски на ведопоток и отбражение на холсте
     bodyPix.drawMask(
-      canvas, image, coloredPartImage, opacity, maskBlurAmount,
+      canvas, video, coloredPartImage, opacity, maskBlurAmount,
       flipHorizontal);
 
     console.log(segmentation);
