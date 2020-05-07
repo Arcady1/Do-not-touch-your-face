@@ -84,12 +84,58 @@ function Photo() {
       }
     };
 
-    // проверка, есть ли пересечение массивов
-    // code
+    // координаты лица
+    console.log(arr_face);
+    // координаты кистей
+    console.log(arr_palms);
 
-    // for (let y = 0; y < arr_palms.length; y++) {
-    //   segmentation.data[arr_palms[y]] = 5;
-    // };
+    if (arr_palms.length < arr_face.length) {
+      const something = await searching(arr_face, arr_palms);
+      console.log(something);
+    } else {
+      const something = await searching(arr_palms, arr_face);
+      console.log(something);
+    }
+
+    // поиск пересечения элементотв массивов
+    function searching(arr_1, arr_2) {
+      console.log("Began...");
+      let num, pos, length;
+
+      length = arr_1.length;
+
+      for (let digit = 0; digit < arr_2.length; digit++) {
+        num = arr_2[digit];
+        pos = parseInt(length / 2);
+
+        if (num == arr_1[0])
+          return ('found!');
+
+        else if (num == arr_1[length - 1])
+          return ('found!');
+
+        else {
+          while (pos != 0) {
+            if (pos == (length - 1))
+              break;
+            // 
+            else if (num < arr_1[pos])
+              pos = parseInt(pos / 2);
+            // 
+            else if (num > arr_1[pos]) {
+              pos += (parseInt((length - pos) / 2));
+              if (arr_1[pos] > num)
+                break;
+            }
+            //  
+            else
+              return ('found!');
+          }
+        }
+      }
+
+      return ('NOTfound!');
+    }
 
     // свойства маски
     const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
@@ -104,7 +150,6 @@ function Photo() {
 
     console.log(segmentation);
     // console.log(arr_palms);
-
   }
 
   loadAndPredict();
