@@ -1,4 +1,3 @@
-// подключение к узлу canvas и получение его контекста для работы
 let canvas, video, ctx, imgData;
 
 canvas = document.getElementById('canvas');
@@ -6,7 +5,7 @@ video = document.getElementById('video');
 audio = document.getElementById('audio');
 // image = document.getElementById('image');
 
-// проверка на поддержку браузером canvas.getContext("2d")
+// проверка поддержки браузером canvas.getContext("2d")
 if (canvas.getContext('2d')) {
   ctx = canvas.getContext('2d');
   videolink();
@@ -65,7 +64,7 @@ function Photo() {
 
     let arr_face = [];
     let arr_palms = [];
-    // идентифицируем только лицо (0) и ладони (10)
+    // идентифицируем только лицо (0) и кисти (10)
     for (let x = 0; x < (canvas.width * canvas.height); x++) {
       pix = segmentation.data[x];
 
@@ -76,7 +75,7 @@ function Photo() {
         segmentation.data[x] = 0;
         arr_face.push(x);
       }
-      // массив, хранящий координаты лица
+      // массив, хранящий координаты кистей
       else if ((pix == 10) | (pix == 11)) {
         segmentation.data[x] = 10;
         arr_palms.push(x);
@@ -91,7 +90,7 @@ function Photo() {
     console.log(arr_palms);
 
     if (arr_palms.length < arr_face.length) {
-      const something = await searching(arr_face, arr_palms);
+      const something = searching(arr_face, arr_palms);
       console.log(something);
 
       if (something == 'found!')
@@ -99,7 +98,7 @@ function Photo() {
     }
     // 
     else {
-      const something = await searching(arr_palms, arr_face);
+      const something = searching(arr_palms, arr_face);
       console.log(something);
 
       if (something == 'found!')
@@ -153,7 +152,7 @@ function Photo() {
     const flipHorizontal = false;
     const maskBlurAmount = 0;
 
-    // наложение маски на ведопоток и отбражение на холсте
+    // наложение маски на видеопоток и отображение на canvas
     bodyPix.drawMask(
       canvas, video, coloredPartImage, opacity, maskBlurAmount,
       flipHorizontal);
