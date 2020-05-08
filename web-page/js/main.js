@@ -64,6 +64,7 @@ function Photo() {
 
     let arr_face = [];
     let arr_palms = [];
+    
     // идентифицируем только лицо (0) и кисти (10)
     for (let x = 0; x < (canvas.width * canvas.height); x++) {
       pix = segmentation.data[x];
