@@ -1,1 +1,213 @@
-let canvas,video,ctx,imgData;function videolink(){navigator.getMedia=navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia||navigator.msGetUserMedia,navigator.mediaDevices.getUserMedia({video:!0,audio:!1}).then(e=>{video.srcObject=e,video.play(),canvas.style.display="block",setInterval((function(){Photo()}),1e3)}).catch(()=>{console.log("No camera access!")})}function Photo(){!async function(){const e=await bodyPix.load({architecture:"MobileNetV1",outputStride:16,multiplier:.75,quantBytes:2}),t=await e.segmentPersonParts(video,{flipHorizontal:!1,internalResolution:"medium",segmentationThreshold:.7});let o=[],a=[];for(let e=0;e<canvas.width*canvas.height;e++)pix=t.data[e],pix>1&pix<10|pix>11?t.data[e]=-1:0==pix|1==pix?(t.data[e]=0,o.push(e)):10==pix|11==pix&&(t.data[e]=10,a.push(e));if(console.log("face:"),console.log(o),console.log("palms:"),console.log(a),a.length<o.length){const e=n(o,a);console.log(e),"Yes!"==e&&audio.play()}else{const e=n(a,o);console.log(e),"Yes!"==e&&audio.play()}function n(e,t){let o,a,n,s,i,r,l;if(console.log("Searching is started"),l=100,i=e.length,r=parseInt(i/2),t[0]>e[i-1])return"No-cross!";if(t[i-1]<e[0])return"No-cross!";console.log("crossed-somewhere");for(let l=0;l<t.length;l++){if(o=t[l],a=r,n=a,s=-1,o==e[0])return"Yes!";if(o==e[i-1])return"Yes!";if(o==e[r])return"Yes!";for(;n!=s;)if(o>e[a]){if(a>=r){if(s=n,n=a,a+=parseInt((i-a)/2),Math.abs(e[a]-o)<100)return"Yes!"}else if(a<r&&(s=n,n=a,a+=parseInt((r-a)/2),Math.abs(e[a]-o)<100))return"Yes!"}else if(o<e[a])if(a>r){if(s=n,n=a,a-=parseInt((a-r)/2),Math.abs(e[a]-o)<100)return"Yes!"}else if(a<=r&&(s=n,n=a,a-=parseInt(a/2),Math.abs(e[a]-o)<100))return"Yes!"}return"No-end!"}const s=bodyPix.toColoredPartMask(t);bodyPix.drawMask(canvas,video,s,.7,0,!1),console.log(t)}()}canvas=document.getElementById("canvas"),video=document.getElementById("video"),audio=document.getElementById("audio"),canvas.getContext("2d")?(ctx=canvas.getContext("2d"),videolink()):alert('You browser does not support canvas.getContext("2d")'),setInterval(Photo(),60);
+let canvas, video, ctx, imgData;
+
+canvas = document.getElementById('canvas');
+video = document.getElementById('video');
+audio = document.getElementById('audio');
+// image = document.getElementById('image');
+
+// проверка поддержки браузером canvas.getContext("2d")
+if (canvas.getContext('2d')) {
+  ctx = canvas.getContext('2d');
+  videolink();
+} else
+  alert('You browser does not support canvas.getContext("2d")');
+
+// web-cam code
+function videolink() {
+  navigator.getMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
+
+  navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    })
+    .then(stream => {
+      video.srcObject = stream;
+      video.play();
+      canvas.style.display = 'block';
+      setInterval(function () {
+        Photo();
+      }, 1000);
+    })
+
+    .catch(() => {
+      console.log("No camera access!");
+    });
+}
+
+setInterval(Photo(), 60);
+
+function Photo() {
+  // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
+  // imgData = canvas.toDataURL('image/jpeg', 0.5);
+  // console.log(imgData);
+
+  async function loadAndPredict() {
+    // Loading the model
+    const net = await bodyPix.load({
+      architecture: 'MobileNetV1',
+      outputStride: 16,
+      multiplier: 0.75,
+      quantBytes: 2
+    });
+
+    // Segmentation settings
+    const segmentationConfig = {
+      flipHorizontal: false,
+      internalResolution: 'medium',
+      segmentationThreshold: 0.7
+    };
+
+    const segmentation = await net.segmentPersonParts(video, segmentationConfig);
+
+    let arr_face = [];
+    let arr_palms = [];
+    
+    // идентифицируем только лицо (0) и кисти (10)
+    for (let x = 0; x < (canvas.width * canvas.height); x++) {
+      pix = segmentation.data[x];
+
+      if (((pix > 1) & (pix < 10)) | (pix > 11))
+        segmentation.data[x] = -1;
+      // массив, хранящий координаты лица
+      else if ((pix == 0) | (pix == 1)) {
+        segmentation.data[x] = 0;
+        arr_face.push(x);
+      }
+      // массив, хранящий координаты кистей
+      else if ((pix == 10) | (pix == 11)) {
+        segmentation.data[x] = 10;
+        arr_palms.push(x);
+      }
+    };
+
+    // координаты лица
+    console.log("face:");
+    console.log(arr_face);
+    // координаты кистей
+    console.log("palms:");
+    console.log(arr_palms);
+
+    if (arr_palms.length < arr_face.length) {
+      const something = searching(arr_face, arr_palms);
+      console.log(something);
+
+      if (something == 'Yes!')
+        audio.play();
+    }
+    // 
+    else {
+      const something = searching(arr_palms, arr_face);
+      console.log(something);
+
+      if (something == 'Yes!')
+        audio.play();
+    };
+
+    // поиск пересечения элементотв массивов
+    function searching(arr_1, arr_2) {
+      console.log("Searching is started");
+      let num, pos, old_pos, pre_old, length, center, min_dist;
+
+      min_dist = 100;
+      length = arr_1.length;
+      center = parseInt(length / 2);
+
+      // проверка, что массивы в принципе имеют точки пересечения
+      if (arr_2[0] > arr_1[length - 1])
+        return ('No-cross!');
+      // 
+      else if (arr_2[length - 1] < arr_1[0])
+        return ('No-cross!');
+
+      console.log('crossed-somewhere');
+
+      for (let digit = 0; digit < arr_2.length; digit++) {
+        num = arr_2[digit];
+
+        pos = center;
+        old_pos = pos;
+        pre_old = -1;
+
+        if (num == arr_1[0])
+          return ('Yes!');
+
+        else if (num == arr_1[length - 1])
+          return ('Yes!');
+
+        else if (num == arr_1[center])
+          return ('Yes!');
+
+        while (old_pos != pre_old) {
+          if (num > arr_1[pos]) {
+
+            if (pos >= center) {
+              pre_old = old_pos;
+              old_pos = pos;
+              pos += parseInt((length - pos) / 2);
+
+              if (Math.abs(arr_1[pos] - num) < min_dist) {
+                // alert(num + '&' + arr_1[pos]);
+                return ('Yes!');
+              }
+            }
+            // 
+            else if (pos < center) {
+              pre_old = old_pos;
+              old_pos = pos;
+              pos += parseInt((center - pos) / 2);
+
+              if (Math.abs(arr_1[pos] - num) < min_dist) {
+                // alert(num + '&' + arr_1[pos]);
+                return ('Yes!');
+              }
+            }
+          }
+          //  
+          else if (num < arr_1[pos]) {
+            if (pos > center) {
+              pre_old = old_pos;
+              old_pos = pos;
+              pos -= parseInt((pos - center) / 2);
+
+              if (Math.abs(arr_1[pos] - num) < min_dist) {
+                // alert(num + '&' + arr_1[pos]);
+                return ('Yes!');
+              }
+            }
+            // 
+            else if (pos <= center) {
+              pre_old = old_pos;
+              old_pos = pos;
+              pos -= parseInt(pos / 2);
+
+              if (Math.abs(arr_1[pos] - num) < min_dist) {
+                // alert(num + '&' + arr_1[pos]);
+                return ('Yes!');
+              }
+            }
+          }
+        }
+      }
+
+      return ('No-end!');
+    };
+
+    // свойства маски
+    const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
+    const opacity = 0.7;
+    const flipHorizontal = false;
+    const maskBlurAmount = 0;
+
+    // наложение маски на видеопоток и отображение на canvas
+    bodyPix.drawMask(
+      canvas, video, coloredPartImage, opacity, maskBlurAmount,
+      flipHorizontal);
+
+    console.log(segmentation);
+  }
+
+  loadAndPredict();
+}
