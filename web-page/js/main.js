@@ -3,7 +3,6 @@ let canvas, video, ctx, imgData;
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
 audio = document.getElementById('audio');
-// image = document.getElementById('image');
 
 // проверка поддержки браузером canvas.getContext("2d")
 if (canvas.getContext('2d')) {
@@ -26,10 +25,9 @@ function videolink() {
     .then(stream => {
       video.srcObject = stream;
       video.play();
-      canvas.style.display = 'block';
       setInterval(function () {
         Photo();
-      }, 1000);
+      }, 30);
     })
 
     .catch(() => {
@@ -37,13 +35,7 @@ function videolink() {
     });
 }
 
-setInterval(Photo(), 60);
-
 function Photo() {
-  // НЕ УДАЛЯТЬ! imgData получает URL скриншотов
-  // imgData = canvas.toDataURL('image/jpeg', 0.5);
-  // console.log(imgData);
-
   async function loadAndPredict() {
     // Loading the model
     const net = await bodyPix.load({
@@ -64,7 +56,7 @@ function Photo() {
 
     let arr_face = [];
     let arr_palms = [];
-    
+
     // идентифицируем только лицо (0) и кисти (10)
     for (let x = 0; x < (canvas.width * canvas.height); x++) {
       pix = segmentation.data[x];
@@ -148,10 +140,8 @@ function Photo() {
               old_pos = pos;
               pos += parseInt((length - pos) / 2);
 
-              if (Math.abs(arr_1[pos] - num) < min_dist) {
-                // alert(num + '&' + arr_1[pos]);
+              if (Math.abs(arr_1[pos] - num) < min_dist)
                 return ('Yes!');
-              }
             }
             // 
             else if (pos < center) {
@@ -159,10 +149,8 @@ function Photo() {
               old_pos = pos;
               pos += parseInt((center - pos) / 2);
 
-              if (Math.abs(arr_1[pos] - num) < min_dist) {
-                // alert(num + '&' + arr_1[pos]);
+              if (Math.abs(arr_1[pos] - num) < min_dist)
                 return ('Yes!');
-              }
             }
           }
           //  
@@ -172,10 +160,8 @@ function Photo() {
               old_pos = pos;
               pos -= parseInt((pos - center) / 2);
 
-              if (Math.abs(arr_1[pos] - num) < min_dist) {
-                // alert(num + '&' + arr_1[pos]);
+              if (Math.abs(arr_1[pos] - num) < min_dist)
                 return ('Yes!');
-              }
             }
             // 
             else if (pos <= center) {
@@ -183,10 +169,8 @@ function Photo() {
               old_pos = pos;
               pos -= parseInt(pos / 2);
 
-              if (Math.abs(arr_1[pos] - num) < min_dist) {
-                // alert(num + '&' + arr_1[pos]);
+              if (Math.abs(arr_1[pos] - num) < min_dist)
                 return ('Yes!');
-              }
             }
           }
         }
