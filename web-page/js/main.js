@@ -1,4 +1,4 @@
-let canvas, video, ctx, imgData;
+let canvas, video, ctx;
 
 canvas = document.getElementById('canvas');
 video = document.getElementById('video');
@@ -76,11 +76,11 @@ function Photo() {
     };
 
     // координаты лица
-    console.log("face:");
-    console.log(arr_face);
+    // console.log("face:");
+    // console.log(arr_face);
     // координаты кистей
-    console.log("palms:");
-    console.log(arr_palms);
+    // console.log("palms:");
+    // console.log(arr_palms);
 
     if (arr_palms.length < arr_face.length) {
       const something = searching(arr_face, arr_palms);
@@ -108,10 +108,10 @@ function Photo() {
       center = parseInt(length / 2);
 
       // проверка, что массивы в принципе имеют точки пересечения
-      if (arr_2[0] > arr_1[length - 1])
+      if (parseInt(arr_2[0] - arr_1[length - 1]) > min_dist)
         return ('No-cross!');
-      // 
-      else if (arr_2[length - 1] < arr_1[0])
+
+      else if (parseInt(arr_2[length - 1] - arr_1[0]) < min_dist)
         return ('No-cross!');
 
       console.log('crossed-somewhere');
@@ -123,13 +123,13 @@ function Photo() {
         old_pos = pos;
         pre_old = -1;
 
-        if (num == arr_1[0])
+        if (parseInt(Math.abs(num - arr_1[0])) < min_dist)
           return ('Yes!');
 
-        else if (num == arr_1[length - 1])
+        else if (parseInt(Math.abs(num - arr_1[length - 1])) < min_dist)
           return ('Yes!');
 
-        else if (num == arr_1[center])
+        else if (parseInt(Math.abs(num - arr_1[center])) < min_dist)
           return ('Yes!');
 
         while (old_pos != pre_old) {
