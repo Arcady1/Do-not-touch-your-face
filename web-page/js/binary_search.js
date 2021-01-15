@@ -14,8 +14,12 @@ function binarySearchForOverlapping(faceX, palmX) {
         return -1;
 }
 
+// The function finds the intersection of the coordinates of the palm and the face
+// It returns -1 if there are no intersections, otherwise 1
 function binarySearch(largerArray, digit) {
+    // Minimum distance between face and palm
     const interval = 50;
+
     let startIndex = 0;
     let endIndex = largerArray.length - 1;
     let currIndex = newCurrentIndex(startIndex, endIndex);
@@ -39,6 +43,7 @@ function binarySearch(largerArray, digit) {
     }
 }
 
+// The function updates the currIndex
 function newCurrentIndex(startIndex, endIndex) {
     return parseInt((endIndex + startIndex) / 2);
 }

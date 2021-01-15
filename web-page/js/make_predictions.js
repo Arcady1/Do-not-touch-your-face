@@ -12,8 +12,9 @@ async function makePredictions(net, segmentationConfig, video) {
             resolve(resOfSearching);
         })
         .then((resOfSearching) => {
+            // If the palm touched the face
             if (resOfSearching == 1)
-                console.log("song");
+                audio.play();
         })
         .catch((err) => {
             console.log(err);
