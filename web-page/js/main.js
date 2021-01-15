@@ -1,79 +1,43 @@
-let canvas, video, ctx;
-
-canvas = document.getElementById('canvas');
-video = document.getElementById('video');
-audio = document.getElementById('audio');
-
-// проверка поддержки браузером canvas.getContext("2d")
-if (canvas.getContext('2d')) {
-  ctx = canvas.getContext('2d');
-  videolink();
-} else
-  alert('You browser does not support canvas.getContext("2d")');
-
-// web-cam code
-function videolink() {
-  navigator.getMedia = navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia;
-
-  navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false
-    })
-    .then(stream => {
-      video.srcObject = stream;
-      video.play();
-      setInterval(function () {
-        Photo();
-      }, 30);
-    })
-
-    .catch(() => {
-      console.log("No camera access!");
-    });
-}
-
+// 
 function Photo() {
   async function loadAndPredict() {
-    // Loading the model
-    const net = await bodyPix.load({
-      architecture: 'MobileNetV1',
-      outputStride: 16,
-      multiplier: 0.75,
-      quantBytes: 2
-    });
+    //! // Loading the model
+    //! const net = await bodyPix.load({
+    //!   architecture: 'MobileNetV1',
+    //!   outputStride: 16,
+    //!   multiplier: 0.75,
+    //!   quantBytes: 2
+    //! });
 
-    // Segmentation settings
-    const segmentationConfig = {
-      flipHorizontal: false,
-      internalResolution: 'medium',
-      segmentationThreshold: 0.7
-    };
+    //! // Segmentation settings
+    //! const segmentationConfig = {
+    //!   flipHorizontal: false,
+    //!   internalResolution: 'medium',
+    //!   segmentationThreshold: 0.7
+    //! };
 
-    const segmentation = await net.segmentPersonParts(video, segmentationConfig);
+    //! const segmentation = await net.segmentPersonParts(video, segmentationConfig);
 
-    let arr_face = [];
-    let arr_palms = [];
+    //! let arr_face = [];
+    //! let arr_palms = [];
 
-    // идентифицируем только лицо (0) и кисти (10)
-    for (let x = 0; x < (canvas.width * canvas.height); x++) {
-      pix = segmentation.data[x];
+    //! // идентифицируем только лицо (0) и кисти (10)
+    //! for (let x = 0; x < (canvas.width * canvas.height); x++) {
+    //!   pix = segmentation.data[x];
 
-      if (((pix > 1) & (pix < 10)) | (pix > 11))
-        segmentation.data[x] = -1;
-      // массив, хранящий координаты лица
-      else if ((pix == 0) | (pix == 1)) {
-        segmentation.data[x] = 0;
-        arr_face.push(x);
-      }
-      // массив, хранящий координаты кистей
-      else if ((pix == 10) | (pix == 11)) {
-        segmentation.data[x] = 10;
-        arr_palms.push(x);
-      }
-    };
+    //!   if (((pix > 1) & (pix < 10)) | (pix > 11))
+    //!     segmentation.data[x] = -1;
+    //!   // массив, хранящий координаты лица
+    //!   else if ((pix == 0) | (pix == 1)) {
+    //!     segmentation.data[x] = 0;
+    //!     arr_face.push(x);
+    //!   }
+    //!   // массив, хранящий координаты кистей
+    //!   else if ((pix == 10) | (pix == 11)) {
+    //!     segmentation.data[x] = 10;
+    //!     arr_palms.push(x);
+    //!   }
+    //! };
 
     // координаты лица
     // console.log("face:");
