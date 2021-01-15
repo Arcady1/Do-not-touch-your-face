@@ -1,101 +1,44 @@
 // Tthe function determines whether the coordinates of the face and palm have intersected using a binary search
 function binarySearchForOverlapping(faceX, palmX) {
-    return 1;
+    let largerArray = faceX;
+    let smallerArray = palmX;
 
-    if (arr_palms.length < arr_face.length) {
-        const something = searching(arr_face, arr_palms);
-        console.log(something);
-
-        if (something == 'Yes!')
-            audio.play();
-    }
-    // 
-    else {
-        const something = searching(arr_palms, arr_face);
-        console.log(something);
-
-        if (something == 'Yes!')
-            audio.play();
-    };
-
-    // поиск пересечения элементотв массивов
-    function searching(arr_1, arr_2) {
-        console.log("Searching is started");
-        let num, pos, old_pos, pre_old, length, center, min_dist;
-
-        min_dist = 100;
-        length = arr_1.length;
-        center = parseInt(length / 2);
-
-        // проверка, что массивы в принципе имеют точки пересечения
-        if (parseInt(arr_2[0] - arr_1[length - 1]) > min_dist)
-            return ('No-cross!');
-
-        else if (parseInt(arr_2[length - 1] - arr_1[0]) < min_dist)
-            return ('No-cross!');
-
-        console.log('crossed-somewhere');
-
-        for (let digit = 0; digit < arr_2.length; digit++) {
-            num = arr_2[digit];
-
-            pos = center;
-            old_pos = pos;
-            pre_old = -1;
-
-            if (parseInt(Math.abs(num - arr_1[0])) < min_dist)
-                return ('Yes!');
-
-            else if (parseInt(Math.abs(num - arr_1[length - 1])) < min_dist)
-                return ('Yes!');
-
-            else if (parseInt(Math.abs(num - arr_1[center])) < min_dist)
-                return ('Yes!');
-
-            while (old_pos != pre_old) {
-                if (num > arr_1[pos]) {
-
-                    if (pos >= center) {
-                        pre_old = old_pos;
-                        old_pos = pos;
-                        pos += parseInt((length - pos) / 2);
-
-                        if (Math.abs(arr_1[pos] - num) < min_dist)
-                            return ('Yes!');
-                    }
-                    // 
-                    else if (pos < center) {
-                        pre_old = old_pos;
-                        old_pos = pos;
-                        pos += parseInt((center - pos) / 2);
-
-                        if (Math.abs(arr_1[pos] - num) < min_dist)
-                            return ('Yes!');
-                    }
-                }
-                //  
-                else if (num < arr_1[pos]) {
-                    if (pos > center) {
-                        pre_old = old_pos;
-                        old_pos = pos;
-                        pos -= parseInt((pos - center) / 2);
-
-                        if (Math.abs(arr_1[pos] - num) < min_dist)
-                            return ('Yes!');
-                    }
-                    // 
-                    else if (pos <= center) {
-                        pre_old = old_pos;
-                        old_pos = pos;
-                        pos -= parseInt(pos / 2);
-
-                        if (Math.abs(arr_1[pos] - num) < min_dist)
-                            return ('Yes!');
-                    }
-                }
-            }
+    if ((faceX.length > 0) && (palmX.length > 0)) {
+        if (palmX.length > faceX.length) {
+            largerArray = palmX;
+            smallerArray = faceX;
         }
 
-        return ('No-end!');
-    };
+        return binarySearch(largerArray, smallerArray[0]);
+    } else
+        return -1;
+}
+
+function binarySearch(largerArray, digit) {
+    const interval = 50;
+    let startIndex = 0;
+    let endIndex = largerArray.length - 1;
+    let currIndex = newCurrentIndex(startIndex, endIndex);
+    let currDigit = 0;
+
+    while (currIndex != startIndex) {
+        currDigit = largerArray[currIndex];
+
+        if (currDigit > digit)
+            endIndex = currIndex;
+        else if (currDigit < digit)
+            startIndex = currIndex;
+
+        if (Math.abs(digit - currDigit) <= interval)
+            return 1;
+
+        currIndex = newCurrentIndex(startIndex, endIndex);
+
+        if (currIndex == startIndex)
+            return -1;
+    }
+}
+
+function newCurrentIndex(startIndex, endIndex) {
+    return parseInt((endIndex + startIndex) / 2);
 }

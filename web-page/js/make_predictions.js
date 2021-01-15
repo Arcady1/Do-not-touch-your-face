@@ -11,6 +11,10 @@ async function makePredictions(net, segmentationConfig, video) {
             let resOfSearching = binarySearchForOverlapping(faceAndPalmObj.face, faceAndPalmObj.palm);
             resolve(resOfSearching);
         })
+        .then((resOfSearching) => {
+            if (resOfSearching == 1)
+                console.log("song");
+        })
         .catch((err) => {
             console.log(err);
         });
@@ -20,7 +24,7 @@ async function makePredictions(net, segmentationConfig, video) {
     // Setting the mask properties
     maskProperties(segmentation);
 
-    setTimeout(makePredictions, 1000, net, segmentationConfig, video);
+    setTimeout(makePredictions, 0, net, segmentationConfig, video);
 }
 
 // Face (0) and hands (10) only
