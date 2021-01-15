@@ -3,21 +3,22 @@ async function makePredictions(net, segmentationConfig, video) {
     // Body segmentation
     let segmentation = await net.segmentPersonParts(video, segmentationConfig);
 
-    // Face (0) and hands (10) only
-    let faceAndPalmObj = faceAndHandsShowOnly(segmentation)
+    // Make an array of only palm and face X coordinates: face-code == 0, hands-code == 10
+    let faceAndPalmObj = faceAndHandsShowOnly(segmentation);
 
+    // Searching for face and palm intersections
     const faceAndPalmsDetection = new Promise((resolve, reject) => {
             let resOfSearching = binarySearchForOverlapping(faceAndPalmObj.face, faceAndPalmObj.palm);
             resolve(resOfSearching);
-        })
-        .then((resOfSearching) => {
-            console.log(resOfSearching);
         })
         .catch((err) => {
             console.log(err);
         });
 
     await faceAndPalmsDetection;
+
+    // Setting the mask properties
+    maskProperties(segmentation);
 
     setTimeout(makePredictions, 1000, net, segmentationConfig, video);
 }
@@ -49,4 +50,16 @@ function faceAndHandsShowOnly(segmentation) {
         "face": arr_face,
         "palm": arr_palm
     }
+}
+
+// Mask Properties
+function maskProperties(segmentation) {
+    const coloredPartImage = bodyPix.toColoredPartMask(segmentation);
+    const opacity = 0.7;
+    const flipHorizontal = false;
+    const maskBlurAmount = 0;
+
+    bodyPix.drawMask(
+        canvas, video, coloredPartImage, opacity, maskBlurAmount,
+        flipHorizontal);
 }
