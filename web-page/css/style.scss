@@ -1,31 +1,28 @@
 @import '../source/null-style';
 @import '../source/media-style';
+@import '../source/fonts';
+@import '../source/vars';
 
 html {
     font-size: 16px;
 }
 
 .content {
-    min-width: 320px;
-    max-width: 1366px;
-    min-height: 1000px;
-    background-color: #eee;
-    margin: 0 auto;
+    width: 100%;
+    min-width: var(--video_min_width);
+    min-height: 100%;
+    background-color: #333;
 
-    font-family: "Georgia", sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
 
     .content-inner {
-        width: 100%;
+        max-width: var(--content_max_width);
 
-        // заголовок сайта
         .content__title {
             display: block;
             font-size: 2rem;
             text-align: center;
-        }
-
-        .content__title_padding-top {
-            padding-top: calc(50px + 50*(100vw - 320px)/(1366 - 320));
         }
 
         .content__video {
@@ -34,16 +31,22 @@ html {
             flex-wrap: wrap;
             margin-top: 50px;
 
-            // web-cam
-            .video_set {
-                outline: 1px solid #000;
+            .video_settings {
+                transform: scaleX(-1);
+                border-radius: 1%;
             }
 
-            // canvas
             .canvas_set {
                 display: block;
-                outline: 1px solid #000;
             }
         }
+    }
+
+    .content-inner_margin {
+        margin: 0 auto;
+    }
+
+    .content-inner_padding {
+        padding: calc(50px + 50*(100vw - 320px)/(1366 - 320)) 0;
     }
 }

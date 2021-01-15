@@ -1,8 +1,8 @@
-@media (min-width: 1366px) {
+@media (max-width: 1290px) {
     .content {
         .content-inner {
-            .content__title_padding-top {
-                padding-top: 100px !important;
+            .canvas_set {
+                margin-top: calc(50px + 50*(100vw - 320px)/(1366 - 320)) !important;
             }
         }
     }
