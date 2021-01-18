@@ -1,7 +1,7 @@
 <h1 align="center">
   <br>
-  <a href="https://do-not-touch-you-face.glitch.me/" target=_blank>
-    <img src="./web-page/icon/touch-face.jpg" alt="Do-not-touch-your-face" width="400px">
+  <a href="https://do-not-touch-you-face.glitch.me/">
+    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px">
   </a>
 </h1>
 
