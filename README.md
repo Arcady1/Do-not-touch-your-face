@@ -10,7 +10,7 @@ The following features are implemented in the current version:
 2) Face touch detection
 3) Playing an audible signal in case of touching
 
-![face-GIF](https://github.com/Arcady1/Do-not-touch-your-face/blob/develop-video-test/web-page/icon/v2.gif)
+![face-GIF](https://github.com/Arcady1/Do-not-touch-your-face/blob/master/web-page/icon/v2.gif)
 
 ### How to use
 
