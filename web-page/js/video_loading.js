@@ -21,6 +21,7 @@ function videolink() {
             audio: false
         })
         .then(stream => {
+            // ! Убирать картинку "Нет камеры"
             video.srcObject = stream;
             video.play();
             modelLoading(video);
