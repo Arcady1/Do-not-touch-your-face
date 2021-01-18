@@ -12,6 +12,11 @@ The following features are implemented in the current version:
 
 ![face-GIF](https://github.com/Arcady1/Do-not-touch-your-face/blob/develop-video-test/web-page/icon/v2.gif)
 
+### How it works
+* Open this [web page][1]
+* Allow access to the camera
+* Touch your face to hear the warning tone
+
 ### How to use
 
 To clone and run this application, you'll need Git. From your command line:
