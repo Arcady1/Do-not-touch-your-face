@@ -1,38 +1,29 @@
 @charset "UTF-8";
 /*Обнуление*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
 * {
   padding: 0;
   margin: 0;
   border: 0;
 }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: border-box;
 }
 
-:focus,
-:active {
+:focus, :active {
   outline: none;
 }
 
-a:focus,
-a:active {
+a:focus, a:active {
   outline: none;
 }
 
-nav,
-footer,
-header,
-aside {
+nav, footer, header, aside {
   display: block;
 }
 
-html,
-body {
+html, body {
   height: 100%;
   width: 100%;
   font-size: 100%;
@@ -43,9 +34,7 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-input,
-button,
-textarea {
+input, button, textarea {
   font-family: inherit;
 }
 
@@ -62,8 +51,7 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-a,
-a:visited {
+a, a:visited {
   text-decoration: none;
 }
 
@@ -79,12 +67,7 @@ img {
   vertical-align: top;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
   font-weight: 400;
 }
@@ -95,7 +78,6 @@ h6 {
     margin-top: calc(50px + 50*(100vw - 320px)/(1366 - 320)) !important;
   }
 }
-
 :root {
   --content_max_width: 1366px;
   --video_min_width: 640px;
@@ -113,17 +95,14 @@ html {
   font-family: "Poppins", sans-serif;
   color: #fff;
 }
-
 .content .content-inner {
   max-width: var(--content_max_width);
 }
-
 .content .content-inner .content__title {
   display: block;
   font-size: 2rem;
   text-align: center;
 }
-
 .content .content-inner .content__video {
   display: -webkit-box;
   display: flex;
@@ -131,21 +110,17 @@ html {
   flex-wrap: wrap;
   margin-top: 50px;
 }
-
 .content .content-inner .content__video .video_settings {
   -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+          transform: scaleX(-1);
   border-radius: 1%;
 }
-
 .content .content-inner .content__video .canvas_set {
   display: block;
 }
-
 .content .content-inner_margin {
   margin: 0 auto;
 }
-
 .content .content-inner_padding {
   padding: calc(50px + 50*(100vw - 320px)/(1366 - 320)) 0;
 }
