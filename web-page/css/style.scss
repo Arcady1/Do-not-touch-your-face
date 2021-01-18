@@ -20,9 +20,24 @@ html {
         max-width: var(--content_max_width);
 
         .content__title {
-            display: block;
-            font-size: 2rem;
-            text-align: center;
+            display: flex;
+            font-size: var(--title_and_mute_size);
+            justify-content: center;
+
+            .title__mute-symbol {
+                display: block;
+                width: var(--title_and_mute_size);
+                height: var(--title_and_mute_size);
+                margin-left: 2%;
+                transition: .2s;
+
+                background-image: url('../img/sound/mute.svg');
+                background-size: cover;
+            }
+
+            .title__unmute-symbol {
+                background-image: url('../img/sound/unmute.svg');
+            }
         }
 
         .content__video {
@@ -32,8 +47,10 @@ html {
             margin-top: 50px;
 
             .video_settings {
-                transform: scaleX(-1);
+                // ! transform: scaleX(-1);
                 border-radius: 1%;
+                // !
+                border: 1px solid #fff;
             }
 
             .canvas_set {

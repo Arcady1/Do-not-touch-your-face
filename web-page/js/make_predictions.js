@@ -13,8 +13,17 @@ async function makePredictions(net, segmentationConfig, video) {
         })
         .then((resOfSearching) => {
             // If the palm touched the face
-            if (resOfSearching == 1)
+            if ((resOfSearching == 1) && ((makePredictions.counter == 0) || (makePredictions.counter == undefined))) {
                 audio.play();
+                // Show unmute symbol
+                $muteSymb.toggleClass("title__unmute-symbol");
+                // The number of function calls
+                makePredictions.counter = 1;
+            } else if ((resOfSearching != 1) && (makePredictions.counter == 1)) {
+                // Show mute symbol
+                $muteSymb.toggleClass("title__unmute-symbol");
+                makePredictions.counter = 0;
+            }
         })
         .catch((err) => {
             console.log(err);
