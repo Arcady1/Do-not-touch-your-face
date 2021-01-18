@@ -1,4 +1,7 @@
-# [Do-not-touch-your-face][1]
+<h1 align="center">
+  <br>
+  <a href="https://do-not-touch-you-face.glitch.me/"><img src="./web-page/icon/face.jpg" alt="Do-not-touch-your-face" width="500px" style="background-color: #fff;"></a>
+</h1>
 
 ### Hackaton project
 This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. 
