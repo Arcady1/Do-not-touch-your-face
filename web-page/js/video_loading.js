@@ -11,21 +11,6 @@ else
 
 // web-cam code
 function videolink() {
-    navigator.getMedia = navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia ||
-        navigator.msGetUserMedia;
-
-    navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false
-        })
-        .then(stream => {
-            // ! video.srcObject = stream;
-            // ! video.play();
-            modelLoading(video);
-        })
-        .catch(() => {
-            console.log("No camera access!");
-        });
+    video.play();
+    modelLoading(video);
 }
