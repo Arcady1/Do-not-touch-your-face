@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't touch your face</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="content">
+        <div class="content-inner content-inner_margin content-inner_padding">
+            <h1 class="content__title">Don't touch your face!
+                <div class="title__mute-symbol" id="mute-symbol"></div>
+            </h1>
+            <div class="content__video">
+                <video id="video" width="640px" height="480px" class="video_settings">
+                    No video support in your browser... Use Google Chrome
+                </video>
+                <canvas id="canvas" class="canvas_set video_settings" width="640px" height="480px">
+                    No canvas support in your browser... Use Google Chrome
+                </canvas>
+            </div>
+            <audio id="audio" src="sound/short.mp3"></audio>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- Load BodyPix -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+    <!-- Scripts -->
+    <script src="./js/model_loading.js"></script>
+    <script src="./js/video_loading.js"></script>
+    <script src="./js/make_predictions.js"></script>
+    <script src="./js/binary_search.js"></script>
+</body>
+
+</html>

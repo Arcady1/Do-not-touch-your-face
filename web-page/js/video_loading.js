@@ -1,6 +1,7 @@
 let canvas = document.getElementById('canvas');
 let video = document.getElementById('video');
 let audio = document.getElementById('audio');
+let $muteSymb = $("#mute-symbol");
 
 // Whether the browser supports canvas.getContext("2d")
 if (canvas.getContext('2d'))

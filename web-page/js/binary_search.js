@@ -9,38 +9,43 @@ function binarySearchForOverlapping(faceX, palmX) {
             smallerArray = faceX;
         }
 
-        return binarySearch(largerArray, smallerArray[0]);
+        return binarySearch(largerArray, smallerArray);
     } else
         return -1;
 }
 
 // The function finds the intersection of the coordinates of the palm and the face
 // It returns -1 if there are no intersections, otherwise 1
-function binarySearch(largerArray, digit) {
+function binarySearch(largerArray, smallerArray) {
     // Minimum distance between face and palm
     const interval = 50;
+    let startIndex, endIndex, currIndex, digit;
 
-    let startIndex = 0;
-    let endIndex = largerArray.length - 1;
-    let currIndex = newCurrentIndex(startIndex, endIndex);
-    let currDigit = 0;
-
-    while (currIndex != startIndex) {
-        currDigit = largerArray[currIndex];
-
-        if (currDigit > digit)
-            endIndex = currIndex;
-        else if (currDigit < digit)
-            startIndex = currIndex;
-
-        if (Math.abs(digit - currDigit) <= interval)
-            return 1;
-
+    for (let i = 0; i < smallerArray.length; i++) {
+        startIndex = 0;
+        endIndex = largerArray.length - 1;
         currIndex = newCurrentIndex(startIndex, endIndex);
+        digit = smallerArray[i];
 
-        if (currIndex == startIndex)
-            return -1;
+        while (currIndex != startIndex) {
+            currDigit = largerArray[currIndex];
+
+            if (currDigit > digit)
+                endIndex = currIndex;
+            else if (currDigit < digit)
+                startIndex = currIndex;
+
+            if (Math.abs(digit - currDigit) <= interval)
+                return 1;
+
+            currIndex = newCurrentIndex(startIndex, endIndex);
+
+            if (currIndex == startIndex)
+                break;
+        }
     }
+    // If the user didn't touch the face
+    return -1;
 }
 
 // The function updates the currIndex
