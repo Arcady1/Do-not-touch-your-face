@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://do-not-touch-you-face.glitch.me/"><img src="./web-page/icon/face.jpg" alt="Do-not-touch-your-face" width="400px""></a>
+  <a href="https://do-not-touch-you-face.glitch.me/"><img src="./web-page/icon/touch-face.jpg" alt="Do-not-touch-your-face" width="400px""></a>
 </h1>
 
 ### Hackaton project
