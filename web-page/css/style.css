@@ -128,6 +128,11 @@ html {
 .content .content-inner .content__video .canvas_set {
   display: block;
 }
+.content .content-inner .content__video .button_play {
+  width: 200px;
+  height: 20px;
+  background-color: #fff;
+}
 .content .content-inner_margin {
   margin: 0 auto;
 }

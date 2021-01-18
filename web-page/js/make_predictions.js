@@ -12,7 +12,7 @@ async function makePredictions(net, segmentationConfig, video) {
             resolve(resOfSearching);
         })
         .then((resOfSearching) => {
-            // If the palm touched the face
+            // If the palm touched the face            
             if ((resOfSearching == 1) && ((makePredictions.counter == 0) || (makePredictions.counter == undefined))) {
                 audio.play();
                 // Show unmute symbol
