@@ -21,8 +21,8 @@ function videolink() {
             audio: false
         })
         .then(stream => {
-            // ! video.srcObject = stream;
-            // ! video.play();
+            video.srcObject = stream;
+            video.play();
             modelLoading(video);
         })
         .catch(() => {

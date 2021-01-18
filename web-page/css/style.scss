@@ -29,7 +29,7 @@ html {
                 width: var(--title_and_mute_size);
                 height: var(--title_and_mute_size);
                 margin-left: 2%;
-                transition: .2s;
+                transition: .5s;
 
                 background-image: url('../img/sound/mute.svg');
                 background-size: cover;
@@ -47,10 +47,8 @@ html {
             margin-top: 50px;
 
             .video_settings {
-                // ! transform: scaleX(-1);
+                transform: scaleX(-1);
                 border-radius: 1%;
-                // !
-                border: 1px solid #fff;
             }
 
             .canvas_set {
