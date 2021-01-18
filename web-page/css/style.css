@@ -100,16 +100,19 @@ html {
   max-width: var(--content_max_width);
 }
 .content .content-inner .content__title {
+  display: -webkit-box;
   display: flex;
   font-size: var(--title_and_mute_size);
-  justify-content: center;
+  -webkit-box-pack: center;
+          justify-content: center;
 }
 .content .content-inner .content__title .title__mute-symbol {
   display: block;
   width: var(--title_and_mute_size);
   height: var(--title_and_mute_size);
   margin-left: 2%;
-  transition: 0.5s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   background-image: url("../img/sound/mute.svg");
   background-size: cover;
 }
@@ -117,13 +120,15 @@ html {
   background-image: url("../img/sound/unmute.svg");
 }
 .content .content-inner .content__video {
+  display: -webkit-box;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 50px;
 }
 .content .content-inner .content__video .video_settings {
-  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
   border-radius: 1%;
 }
 .content .content-inner .content__video .canvas_set {
