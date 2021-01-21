@@ -17,7 +17,7 @@ The following features are implemented in the current version:
 2) Face touch detection
 3) Playing an audible signal in case of touching
 
-![face-GIF](https://github.com/Arcady1/Do-not-touch-your-face/blob/develop-video-test/web-page/icon/v2.gif)
+![face-GIF][0]
 
 ### How it works
 * Open this [DEMO][1]
@@ -56,6 +56,7 @@ This software uses the following open source packages:
 ### License
 MIT
 
+[0]: https://github.com/Arcady1/Do-not-touch-your-face/blob/master/web-page/icon/v2.gif
 [1]: https://do-not-touch-you-face.glitch.me/
 [2]: https://github.com/jquery/jquery
 [3]: https://github.com/tensorflow/tfjs
