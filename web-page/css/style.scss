@@ -49,7 +49,10 @@ html {
             .video_settings {
                 transform: scaleX(-1);
                 border-radius: 1%;
-                background-image: url('../img/sound/');
+                background-image: url('../img/camera/no-camera-access.svg');
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
             }
 
             .canvas_set {
