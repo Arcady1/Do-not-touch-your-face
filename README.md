@@ -1,10 +1,11 @@
-<div style="display: flex; justify-content: space-evenly;">
-  <a href="https://do-not-touch-you-face.glitch.me/" style="display: block;">
-    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" style="display: block;">
+<div>
+  <a href="https://do-not-touch-you-face.glitch.me/">
+    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" align="left">
   </a>
-  <div style="display: flex; flex-direction: column; justify-content: center;">
-    <h3 style="display: inline-block; text-align: center;"> Don't touch your face!</h3>
-    <p style="display: block;">
+  <br><br>
+  <div>
+    <h3> Don't touch your face!</h3>
+    <p>
       This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. <br><br>
       <b>Problem:</b> People unconsciously touch their faces while working at the computer
       <br>
