@@ -5,6 +5,11 @@
   </a>
 </h1>
 
+### Important
+1) This website uses your webcam
+2) Face detection is performed online
+3) In the GIF below, a video has been inserted for clarity
+
 ### Hackaton project
 This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. 
 The following features are implemented in the current version:
@@ -15,7 +20,7 @@ The following features are implemented in the current version:
 ![face-GIF](https://github.com/Arcady1/Do-not-touch-your-face/blob/develop-video-test/web-page/icon/v2.gif)
 
 ### How it works
-* Open this [web page][1]
+* Open this [DEMO][1]
 * Allow access to the camera
 * Touch your face to hear the warning tone
 
