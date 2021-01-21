@@ -1,24 +1,20 @@
-
-<h1 align="center">
-  <br>
-  <a href="https://do-not-touch-you-face.glitch.me/">
-    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px">
+<div style="display: flex; justify-content: space-evenly;">
+  <a href="https://do-not-touch-you-face.glitch.me/" style="display: block;">
+    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" style="display: block;">
   </a>
-</h1>
-
-### Important
-1) This website uses your webcam
-2) Face detection is performed online
-3) In the GIF below, a video has been inserted for clarity
-
-### Hackaton project
-This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. 
-The following features are implemented in the current version:
-1) Segmentation of a person's face and palms
-2) Face touch detection
-3) Playing an audible signal in case of touching
+  <div style="display: flex; flex-direction: column; justify-content: center;">
+    <h3 style="display: inline-block; text-align: center;"> Don't touch your face!</h3>
+    <p style="display: block;">
+      This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. <br><br>
+      <b>Problem:</b> People unconsciously touch their faces while working at the computer
+      <br>
+      <b>Idea:</b> Track user face and palms with the webcam using the TensorFlow BodyPix and make sound notification
+    </p>
+  </div>
+</div>
 
 ![face-GIF][0]
+In the GIF, a video has been inserted for clarity
 
 ### How it works
 * Open this [DEMO][1]
