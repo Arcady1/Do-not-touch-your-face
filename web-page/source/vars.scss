@@ -1,5 +1,5 @@
 :root {
-    --content_max_width: 1366px;
-    --video_min_width: 640px;
-    --title_and_mute_size: 2rem;
+    --content_max_width: 2200px;
+    --video_min_width: 305px;
+    --title_and_mute_size: clamp(20px, 5vw, 35px);
 }
