@@ -1,18 +1,11 @@
-<div>
   <a href="https://do-not-touch-you-face.glitch.me/">
-    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" align="left">
+    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" align="center">
   </a>
-  <br><br>
-  <div>
-    <h3> Don't touch your face!</h3>
-    <p>
-      This project was created as part of a hackathon dedicated to fighting the spread of coronavirus infection. <br><br>
-      <b>Problem:</b> People unconsciously touch their faces while working at the computer
-      <br>
-      <b>Idea:</b> Track user face and palms with the webcam using the TensorFlow BodyPix and make sound notification
-    </p>
-  </div>
-</div>
+  
+ ### Don't touch your face!
+<b>Problem:</b> People unconsciously touch their faces while working at the computer
+<br>
+<b>Idea:</b> Track user face and palms with the webcam using the TensorFlow BodyPix and make sound notification
 
 ![face-GIF][0]
 In the GIF, a video has been inserted for clarity
