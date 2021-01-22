@@ -1,3 +1,6 @@
+let vars = require('./vars.js');
+let binary_search = require('./binary_search.js');
+
 // The function makes predictions
 async function makePredictions(net, segmentationConfig, video) {
     // Body segmentation
@@ -8,20 +11,20 @@ async function makePredictions(net, segmentationConfig, video) {
 
     // Searching for face and palm intersections
     const faceAndPalmsDetection = new Promise((resolve, reject) => {
-            let resOfSearching = binarySearchForOverlapping(faceAndPalmObj.face, faceAndPalmObj.palm);
+            let resOfSearching = binary_search.binarySearchForOverlapping(faceAndPalmObj.face, faceAndPalmObj.palm);
             resolve(resOfSearching);
         })
         .then((resOfSearching) => {
             // If the palm touched the face            
             if ((resOfSearching == 1) && ((makePredictions.counter == 0) || (makePredictions.counter == undefined))) {
-                audio.play();
+                vars.audio.play();
                 // Show unmute symbol
-                $muteSymb.addClass("title__unmute-symbol");
+                vars.$muteSymb.addClass("title__unmute-symbol");
                 // The number of function calls
                 makePredictions.counter = 1;
             } else if ((resOfSearching != 1) && (makePredictions.counter == 1)) {
                 // Show mute symbol
-                $muteSymb.removeClass("title__unmute-symbol");
+                vars.$muteSymb.removeClass("title__unmute-symbol");
                 makePredictions.counter = 0;
             }
         })
@@ -46,7 +49,7 @@ function faceAndHandsShowOnly(segmentation) {
     // Current pixel
     let pix = 0;
 
-    for (let x = 0; x < (canvas.width * canvas.height); x++) {
+    for (let x = 0; x < (vars.canvas.width * vars.canvas.height); x++) {
         pix = segmentation.data[x];
 
         if (((pix > 1) && (pix < 10)) || (pix > 11))
@@ -74,6 +77,10 @@ function maskProperties(segmentation) {
     const maskBlurAmount = 0;
 
     bodyPix.drawMask(
-        canvas, video, coloredPartImage, opacity, maskBlurAmount,
+        vars.canvas, video, coloredPartImage, opacity, maskBlurAmount,
         flipHorizontal);
+}
+
+module.exports = {
+    "makePredictions": makePredictions
 }

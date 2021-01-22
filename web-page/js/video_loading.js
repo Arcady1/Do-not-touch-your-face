@@ -1,10 +1,9 @@
-let canvas = document.getElementById('canvas');
-let video = document.getElementById('video');
-let audio = document.getElementById('audio');
-let $muteSymb = $("#mute-symbol");
+let vars = require('./vars.js');
+let $ = require('jquery');
+let model_loading = require('./model_loading.js');
 
 // Whether the browser supports canvas.getContext("2d")
-if (canvas.getContext('2d'))
+if (vars.canvas.getContext('2d'))
     videolink();
 else
     alert('Your browser does\'t support canvas.getContext("2d")');
@@ -21,11 +20,19 @@ function videolink() {
             audio: false
         })
         .then(stream => {
-            video.srcObject = stream;
-            video.play();
-            modelLoading(video);
+            vars.video.srcObject = stream;
+            hideCameraImg();
+            vars.video.play();
+            model_loading.modelLoading(vars.video);
         })
         .catch(() => {
             console.log("No camera access!");
         });
+}
+
+function hideCameraImg() {
+    let videAndCanvas = $("video, canvas");
+    videAndCanvas.css({
+        "background-image": "none"
+    })
 }

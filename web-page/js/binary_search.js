@@ -52,3 +52,7 @@ function binarySearch(largerArray, smallerArray) {
 function newCurrentIndex(startIndex, endIndex) {
     return parseInt((endIndex + startIndex) / 2);
 }
+
+module.exports = {
+    "binarySearchForOverlapping": binarySearchForOverlapping
+}

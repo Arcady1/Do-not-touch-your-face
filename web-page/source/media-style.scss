@@ -1,0 +1,19 @@
+@media (min-width: 1366px) {
+    .content__video_margin {
+        margin-top: 95px !important;
+    }
+
+    .content_padding {
+        padding: 120px 0 !important;
+    }
+
+    :root {
+        --title_and_mute_size: 35px !important; 
+    }
+}
+
+@media (max-width: 1325px) {
+    .canvas_set {
+        margin-top: 2vh !important;
+    }
+}

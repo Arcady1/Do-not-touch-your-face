@@ -1,0 +1,19 @@
+{
+  "name": "do-not-touch-your-face",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-app": "browserify web-page/js/video_loading.js web-page/js/window_resize.js -o web-page/js/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcady1/Do-not-touch-your-face.git"
+  },
+  "author": "Arkady Gusarov",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "jquery": "^3.5.1"
+  }
+}
