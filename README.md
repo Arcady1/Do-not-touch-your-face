@@ -40,9 +40,10 @@ $ cd Doodle-Recognition-Web/web-page
 ### Credits
 This software uses the following open source packages:
 
-* [jQuery][2] v3.5.1
-* [TensorFlow.js][3] v1.0.0
-* [BodyPix - Person Segmentation][4] v2.0
+* [jQuery][2] "v3.5.1"
+* [Browserify][2.5] "^17.0.0"
+* [TensorFlow.js][3] "1.0.0"
+* [BodyPix - Person Segmentation][4] "2.0"
 
 ### Acknowledgments
 * [TensorFlow Blog](https://blog.tensorflow.org/search?label=TensorFlow.js&max-results=20)<br>
@@ -58,5 +59,6 @@ MIT
 [0]: https://github.com/Arcady1/Do-not-touch-your-face/blob/master/web-page/icon/v2.gif
 [1]: https://do-not-touch-you-face.glitch.me/
 [2]: https://github.com/jquery/jquery
+[2.5]: https://github.com/browserify/browserify
 [3]: https://github.com/tensorflow/tfjs
 [4]: https://github.com/tensorflow/tfjs-models/tree/master/body-pix
