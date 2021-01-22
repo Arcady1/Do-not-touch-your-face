@@ -8,7 +8,7 @@
   <br>
 </h1>
 
-<b>Problem:</b> People unconsciously touch their faces while working at the computer
+<b>Problem:</b> People unconsciously touch their faces while working at the computer<br>
 <b>Idea:</b> Track user face and palms with the webcam using the TensorFlow BodyPix and make sound notification
 
 ![face-GIF][0]
