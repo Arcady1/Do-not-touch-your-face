@@ -1,10 +1,14 @@
-  <a href="https://do-not-touch-you-face.glitch.me/">
-    <img src="./web-page/icon/touch-face.jpg" alt="Do not touch your face" width="400px" align="center">
-  </a>
   
- ### Don't touch your face!
+<h1 align="center">
+  <a href="https://do-not-touch-you-face.glitch.me/">
+    <img src="./web-page/icon/touch-face.jpg" alt="Don't touch your face!" width="350"></img>
+  </a>
+  <br>
+  <a href="https://do-not-touch-you-face.glitch.me/">Don't touch your face!</a>
+  <br>
+</h1>
+
 <b>Problem:</b> People unconsciously touch their faces while working at the computer
-<br>
 <b>Idea:</b> Track user face and palms with the webcam using the TensorFlow BodyPix and make sound notification
 
 ![face-GIF][0]
