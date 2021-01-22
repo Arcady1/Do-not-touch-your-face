@@ -1,6 +1,24 @@
 @charset "UTF-8";
-/*Обнуление*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@media (min-width: 1366px) {
+  .content__video_margin {
+    margin-top: 95px !important;
+  }
+
+  .content_padding {
+    padding: 120px 0 !important;
+  }
+
+  :root {
+    --title_and_mute_size: 35px !important;
+  }
+}
+@media (max-width: 1325px) {
+  .canvas_set {
+    margin-top: 2vh !important;
+  }
+}
+/*Обнуление*/
 * {
   padding: 0;
   margin: 0;
@@ -74,9 +92,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /*--------------------*/
 :root {
-  --content_max_width: 2200px;
-  --video_min_width: 305px;
-  --title_and_mute_size: clamp(20px, 5vw, 35px);
+  --content_max_width: 1600px;
+  --video_min_width: 320px;
+  --title_and_mute_size: calc(20px + 15*(100vw - 320px)/(1366 - 320));
 }
 
 html {
@@ -101,7 +119,8 @@ html {
 .content .content-inner {
   width: 100%;
   max-width: var(--content_max_width);
-  padding: 0 10%;
+  padding: 0 calc(15px + 0*(100vw - 320px)/(1366 - 320));
+  margin: 0 auto;
 }
 .content .content-inner .content__title {
   display: -webkit-box;
@@ -128,10 +147,10 @@ html {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: clamp(15px, 4vw, 50px);
 }
 .content .content-inner .content__video .video_settings {
-  width: clamp(290px, 60vw, 640px);
+  width: 100%;
+  max-width: 640px;
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
   border-radius: 1%;
@@ -140,18 +159,16 @@ html {
   background-position: center;
   background-repeat: no-repeat;
 }
-.content .content-inner .content__video .video_settings_margin {
-  margin-top: clamp(30px, 9vw, 40px);
-  margin-left: clamp(30px, 9vw, 40px);
-  margin-right: clamp(30px, 9vw, 40px);
-}
 .content .content-inner .content__video .canvas_set {
   display: block;
+}
+.content .content-inner .content__video_margin {
+  margin-top: calc(25px + 90*(100vw - 320px)/(1366 - 320));
 }
 .content .content-inner_margin {
   margin: 0 auto;
 }
 
 .content_padding {
-  padding: clamp(30px, 9vw, 120px) 0;
+  padding: calc(30px + 90*(100vw - 320px)/(1366 - 320)) 0;
 }

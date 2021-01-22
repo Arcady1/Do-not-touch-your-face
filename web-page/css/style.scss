@@ -1,3 +1,4 @@
+@import '../source/media-style';
 @import '../source/null-style';
 @import '../source/fonts';
 @import '../source/vars';
@@ -21,7 +22,8 @@ html {
     .content-inner {
         width: 100%;
         max-width: var(--content_max_width);
-        padding: 0 10%;
+        padding: 0 calc(15px + 0*(100vw - 320px)/(1366 - 320));
+        margin: 0 auto;
 
         .content__title {
             display: flex;
@@ -48,10 +50,10 @@ html {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            margin-top: clamp(15px, 4vw, 50px);
 
             .video_settings {
-                width: clamp(290px, 60vw, 640px);
+                width: 100%;
+                max-width: 640px;
                 transform: scaleX(-1);
                 border-radius: 1%;
                 background-image: url('../img/camera/no-camera-access.svg');
@@ -60,15 +62,13 @@ html {
                 background-repeat: no-repeat;
             }
 
-            .video_settings_margin {
-                margin-top: clamp(30px, 9vw, 40px);
-                margin-left: clamp(30px, 9vw, 40px);
-                margin-right: clamp(30px, 9vw, 40px);
-            }
-
             .canvas_set {
                 display: block;
             }
+        }
+
+        .content__video_margin {
+            margin-top: calc(25px + 90*(100vw - 320px)/(1366 - 320));
         }
     }
 
@@ -78,5 +78,5 @@ html {
 }
 
 .content_padding {
-    padding: clamp(30px, 9vw, 120px) 0;
+    padding: calc(30px + 90*(100vw - 320px)/(1366 - 320)) 0;
 }

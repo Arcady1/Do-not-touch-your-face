@@ -22,10 +22,18 @@ function videolink() {
         })
         .then(stream => {
             video.srcObject = stream;
+            hideNoCamerImg();
             video.play();
             modelLoading(video);
         })
         .catch(() => {
             console.log("No camera access!");
         });
+}
+
+function hideNoCamerImg() {
+    let videAndCanvas = $("video, canvas");
+    videAndCanvas.css({
+        "background-image": "none"
+    })
 }
