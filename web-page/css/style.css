@@ -102,13 +102,9 @@ html {
 }
 
 .content {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   min-width: var(--video_min_width);
   min-height: 100%;
@@ -123,18 +119,15 @@ html {
   margin: 0 auto;
 }
 .content .content-inner .content__title {
-  display: -webkit-box;
   display: flex;
   font-size: var(--title_and_mute_size);
-  -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 .content .content-inner .content__title .title__mute-symbol {
   display: block;
   width: var(--title_and_mute_size);
   height: var(--title_and_mute_size);
   margin-left: 2%;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   background-image: url("../img/sound/mute.svg");
   background-size: cover;
@@ -143,7 +136,6 @@ html {
   background-image: url("../img/sound/unmute.svg");
 }
 .content .content-inner .content__video {
-  display: -webkit-box;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -151,8 +143,7 @@ html {
 .content .content-inner .content__video .video_settings {
   width: 100%;
   max-width: 640px;
-  -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
+  transform: scaleX(-1);
   border-radius: 1%;
   background-image: url("../img/camera/no-camera-access.svg");
   background-size: contain;
