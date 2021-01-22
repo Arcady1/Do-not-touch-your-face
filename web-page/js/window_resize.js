@@ -1,3 +1,5 @@
+let $ = require('jquery');
+
 window.onload = () => {
     resizeVidoAndCanvas();
 }

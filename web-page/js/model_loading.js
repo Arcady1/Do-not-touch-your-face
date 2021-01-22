@@ -1,3 +1,5 @@
+let make_predictions = require('./make_predictions.js');
+
 // The function loads the model
 async function modelLoading(video) {
     // Loading the model
@@ -16,5 +18,9 @@ async function modelLoading(video) {
     };
     
     // Making predictions
-    makePredictions(net, segmentationConfig, video);
+    make_predictions.makePredictions(net, segmentationConfig, video);
+}
+
+module.exports = {
+    "modelLoading": modelLoading
 }
