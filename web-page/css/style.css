@@ -73,15 +73,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
-@media (max-width: 1290px) {
-  .content .content-inner .canvas_set {
-    margin-top: calc(50px + 50*(100vw - 320px)/(1366 - 320)) !important;
-  }
-}
 :root {
-  --content_max_width: 1366px;
-  --video_min_width: 640px;
-  --title_and_mute_size: 2rem;
+  --content_max_width: 2200px;
+  --video_min_width: 305px;
+  --title_and_mute_size: clamp(20px, 5vw, 35px);
 }
 
 html {
@@ -89,6 +84,9 @@ html {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   min-width: var(--video_min_width);
   min-height: 100%;
@@ -97,21 +95,20 @@ html {
   color: #fff;
 }
 .content .content-inner {
+  width: 100%;
   max-width: var(--content_max_width);
+  padding: 0 10%;
 }
 .content .content-inner .content__title {
-  display: -webkit-box;
   display: flex;
   font-size: var(--title_and_mute_size);
-  -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 .content .content-inner .content__title .title__mute-symbol {
   display: block;
   width: var(--title_and_mute_size);
   height: var(--title_and_mute_size);
   margin-left: 2%;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   background-image: url("../img/sound/mute.svg");
   background-size: cover;
@@ -120,20 +117,24 @@ html {
   background-image: url("../img/sound/unmute.svg");
 }
 .content .content-inner .content__video {
-  display: -webkit-box;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: clamp(15px, 4vw, 50px);
 }
 .content .content-inner .content__video .video_settings {
-  -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
+  width: clamp(290px, 60vw, 640px);
+  transform: scaleX(-1);
   border-radius: 1%;
   background-image: url("../img/camera/no-camera-access.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+.content .content-inner .content__video .video_settings_margin {
+  margin-top: clamp(30px, 9vw, 40px);
+  margin-left: clamp(30px, 9vw, 40px);
+  margin-right: clamp(30px, 9vw, 40px);
 }
 .content .content-inner .content__video .canvas_set {
   display: block;
@@ -141,6 +142,7 @@ html {
 .content .content-inner_margin {
   margin: 0 auto;
 }
-.content .content-inner_padding {
-  padding: calc(50px + 50*(100vw - 320px)/(1366 - 320)) 0;
+
+.content_padding {
+  padding: clamp(30px, 9vw, 120px) 0;
 }
