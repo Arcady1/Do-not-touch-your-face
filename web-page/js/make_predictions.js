@@ -1,3 +1,5 @@
+let audio = document.getElementById('audio');
+
 // The function makes predictions
 async function makePredictions(net, segmentationConfig, video) {
     // Body segmentation
